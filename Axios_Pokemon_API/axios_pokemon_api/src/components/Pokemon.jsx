@@ -4,7 +4,7 @@ import axios from 'axios'
 const Pokemon = () => {
     const [pokemon,setPokemon]=useState([]);
     const fetchData=()=>{
-        axios.get("https://pokeapi.co/api/v2/ability/")
+        axios.get("https://pokeapi.co/api/v2/pokemon?offset=0&limit=807")
         .then((response) => {
             console.log(response.data)
             setPokemon(response.data.results);
