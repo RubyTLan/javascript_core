@@ -64,16 +64,21 @@ const Planets=()=> {
     useEffect(() => {
         axios.get(`https://swapi.dev/api/planets/${id}/`)
         .then(response=>{setResponseData(response.data)})
+        .catch(err=>{
+            setResponseData({error:"these are not the droids you are looking for"})
+        });
         console.log(responseData)
 
     }, [id]);
 
     return (
+        responseData.error?
+        <h1>{responseData.error}</h1>:
         <div>
             <h2>Name: {responseData.name}</h2>
             <p>Climate: {responseData.climate}</p>
             <p>Terrain: {responseData.terrain}</p>
-            <p>Surface Water: {responseData.surface_water}</p>
+            <p>Surface Water: {responseData.surface_water? "true":"false"}</p>
             <p>Resident: {responseData.population}</p>
         </div>
     )
