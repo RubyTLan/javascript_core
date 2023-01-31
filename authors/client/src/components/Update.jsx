@@ -13,6 +13,7 @@ const Update = () => {
         axios.get("http://localhost:8000/api/authors/"+id)
         .then((response) => {
             setName(response.data.name);
+
             // setPrice(response.data.price);
             // setDescription(response.data.description);
         })
@@ -47,7 +48,7 @@ const Update = () => {
         {errors.map((err, index) => <p key={index}>{err}</p>)}
         <div>
             <label >Name:</label>
-            <input type="text" onChange={(e)=>{setName(e.target.value)}} />
+            <input type="text" value= {name} onChange={(e)=>{setName(e.target.value)}} />
           </div>
           {/* <div>
             <label >Price:</label>

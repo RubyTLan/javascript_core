@@ -23,13 +23,13 @@ module.exports.allApi = (req,res)=>{
 }
 
 //read one
-// module.exports.oneApi = (req,res)=>{
-//     const idFromParams =req.params._id
-//     Product.findOne({_id:idFromParams})
-//     .then(product=>res.json(product))
-//     .catch(error=>res.json(error))
+module.exports.oneApi = (req,res)=>{
+    const idFromParams =req.params._id
+    Author.findOne({_id:idFromParams})
+    .then(author=>res.json(author))
+    .catch(error=>res.json(error))
 
-// }
+}
 
 
 //update one
