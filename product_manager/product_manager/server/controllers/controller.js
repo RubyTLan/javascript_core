@@ -8,7 +8,7 @@ module.exports.create = (req,res)=>{
     const newProduct=req.body;
     Product.create(newProduct)
     .then(product=>res.json(product))
-    .catch(error=>res.json(error))
+    .catch(err=>res.status(400).json(err))
 
 }
 
@@ -36,9 +36,9 @@ module.exports.oneApi = (req,res)=>{
 module.exports.update = (req,res)=>{
     const idFromParams =req.params._id
     const updateValue=req.body
-    Product.findOneAndUpdate({_id:idFromParams},updateValue,{new:true})
+    Product.findOneAndUpdate({_id:idFromParams},updateValue,{new:true,runValidators:true})
     .then(product=>res.json(product))
-    .catch(error=>res.json(error))
+    .catch(err=>res.status(400).json(err))
 
 }
 

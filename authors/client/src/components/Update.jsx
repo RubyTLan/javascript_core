@@ -3,20 +3,18 @@ import axios from 'axios';
 import {useParams, useNavigate, Link} from 'react-router-dom'
 
 const Update = () => {
-    const [title,setTitle]=useState("");
-    const [price,setPrice]=useState("");
-    const [description,setDescription]=useState("");
+    const [name,setName]=useState("");
 
     const [errors, setErrors] = useState([]);
     const navigate=useNavigate();
     const {id}=useParams()
 
     useEffect(()=>{
-        axios.get("http://localhost:8000/api/products/"+id)
+        axios.get("http://localhost:8000/api/authors/"+id)
         .then((response) => {
-            setTitle(response.data.title);
-            setPrice(response.data.price);
-            setDescription(response.data.description);
+            setName(response.data.name);
+            // setPrice(response.data.price);
+            // setDescription(response.data.description);
         })
         .catch((error) => {
             console.log(error);
@@ -26,7 +24,7 @@ const Update = () => {
 
     const handleSubmit=(e)=>{
       e.preventDefault();
-      axios.put(`http://localhost:8000/api/products/update/${id}`,{title,price,description})
+      axios.put(`http://localhost:8000/api/authors/update/${id}`,{name})
       .then((response) => {
         navigate("/")
         })
@@ -42,23 +40,25 @@ const Update = () => {
     }
   return (
     <div>
+        <Link to={"/"}><p>Home</p></Link>
+        <br />
+        <p>Edit this author:</p>
         <form onSubmit={handleSubmit}>
         {errors.map((err, index) => <p key={index}>{err}</p>)}
-          <div>
-            <label >Title:</label>
-            <input type="text" value={title} onChange={(e)=>{setTitle(e.target.value)}} />
+        <div>
+            <label >Name:</label>
+            <input type="text" onChange={(e)=>{setName(e.target.value)}} />
           </div>
-          <div>
+          {/* <div>
             <label >Price:</label>
             <input type="number"  value={price} onChange={(e)=>{setPrice(e.target.value)}} />
           </div>
           <div>
             <label >Description:</label>
             <input type="text" value={description} onChange={(e)=>{setDescription(e.target.value)}}  />
-          </div>
-          <button>update</button>
-
-
+          </div> */}
+          <button ><Link to={"/"}>cancel</Link></button>
+          <button type="submit">Submit</button>
         </form>
 
     </div>
